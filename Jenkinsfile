@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     environment {
-        SERVICE_NAME = "arca-agencybanking-transaction-service-consumer"
-        ORGANIZATION_NAME = "wasp-networks"
+        SERVICE_NAME = "reverse-ip"
+        ORGANIZATION_NAME = "frankisinfotech"
         DOCKERHUB_USERNAME = "frankisinfotech"
         REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
         GITHUB_TOKEN=credentials('github-token')
@@ -11,7 +11,12 @@ pipeline {
     }
     
     stages {
-
+	    
+        stage ('Scan IaC') {
+	    steps {
+		    sh 'trivy conf --severity HIGH,CRITICAL  ./iac'
+	    }
+	}
         stage ('Build and Push Image') {
             steps {
                  withDockerRegistry([credentialsId: 'DOCKERHUB_USERNAME', url: ""]) {
@@ -33,11 +38,9 @@ pipeline {
     
        stage ('Deploy to Cluster') {
             steps {
-                withAWS(role: "Jenkins", roleAccount: '164135465533') {
-                sh "aws eks update-kubeconfig --region eu-west-1 --name switch-arca-prod-cluster"
+                sh "aws eks update-kubeconfig --region eu-west-1 --name deel-qa-cluster"
                 sh " envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - "
             }
-        }
     }
    
 	    
