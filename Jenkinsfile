@@ -12,7 +12,13 @@ pipeline {
     
     stages {
 	    
-        stage ('Scan IaC') {
+        stage ('Scan Repo') {
+	    steps {
+		    sh 'trivy repo https://github.com/frankisinfotech/deel-assessment.git'
+	    }
+	}
+	    
+	stage ('Scan IaC') {
 	    steps {
 		    sh 'trivy conf --severity HIGH,CRITICAL  ./iac'
 	    }
