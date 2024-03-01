@@ -37,7 +37,7 @@ metadata:
 spec:
 
   selector:
-    app: arca-agency-transaction-service-consumer
+    app: deel-assessment
 
   ports:
     - name: http
