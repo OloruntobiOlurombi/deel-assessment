@@ -44,7 +44,7 @@ pipeline {
     
        stage ('Deploy to Cluster') {
             steps {
-                sh "aws eks update-kubeconfig --region eu-west-1 --name deel-qa-cluster"
+                sh "aws eks update-kubeconfig --region eu-west-1 --name deel-cluster"
                 sh " envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - "
             }
     }
