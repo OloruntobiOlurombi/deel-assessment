@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: deel-assessment
-        image: ${REPOSITORY_TAG}
+        image: REPOSITORY_TAG
         resources:
           requests:
              memory: 100Mi
