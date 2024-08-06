@@ -15,12 +15,7 @@ spec:
       containers:
       - name: deel-assessment
         image: REPOSITORY_TAG
-        resources:
-          requests:
-             memory: 100Mi
-             cpu: 0.25
-
-        imagePullPolicy: Always
+  
 ---
 apiVersion: v1
 kind: Service
