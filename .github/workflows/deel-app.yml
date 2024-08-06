@@ -34,9 +34,9 @@ jobs:
 
     - name: Build Image 
       run: |
-        docker build -t reactapp .
-        docker tag reactapp:latest 611512058022.dkr.ecr.us-east-1.amazonaws.com/reactapp:${GITHUB_RUN_NUMBER}
-        docker push 611512058022.dkr.ecr.us-east-1.amazonaws.com/reactapp:${GITHUB_RUN_NUMBER}
+        docker build -t deel-app .
+        docker tag deel-app:latest 611512058022.dkr.ecr.us-east-1.amazonaws.com/deel-app:${GITHUB_RUN_NUMBER}
+        docker push 611512058022.dkr.ecr.us-east-1.amazonaws.com/deel-app:${GITHUB_RUN_NUMBER}
 
   Install-kubectl:
     runs-on: ubuntu-latest 
